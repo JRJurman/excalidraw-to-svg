@@ -14,13 +14,16 @@ Please consider supporting Excalidraw by getting [Excalidraw Plus](https://plus.
 You can run this package as a CLI tool by using npx (or if you have it installed as a node dependency).
 It takes in two arguments, the path to the diagram you want to convert, and the output path (which can either be an exact path, or folder).
 
+Note, this version returns a string version of the element (an artifact of `.outerHTML`), if you want to interact with the svg node elements, use the API below.
+
 ```bash
 npx excalidraw-to-svg ./diagrams/example.excalidraw ./output
 ```
 
 ### API
 
-You can install this package as a dependency for a project, and have it build svgs on the JSON files or objects
+You can install this package as a dependency for a project, and have it build svgs on the JSON files or objects.
+Note, this function returns a DOM element, so if you want a string, use `.outerHTML` to get the string content.
 
 ```javascript
 const excalidrawToSvg = require("excalidrawToSvg");
@@ -60,7 +63,7 @@ const excalidrawDiagram = {
 };
 
 const diagramSvg = excalidrawToSvg(excalidrawDiagram);
-console.log(diagram);
+console.log(diagram.outerHTML);
 ```
 
 ## Why?
