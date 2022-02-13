@@ -35,6 +35,6 @@ const mockDiagram = {
 describe("excalidraw-to-svg function", () => {
   it("should render an svg", async () => {
     const svg = excalidrawToSvg(mockDiagram);
-    expect(svg).toMatch(/<svg/);
+    expect(svg.outerHTML).toMatch(/<svg/);
   });
 });

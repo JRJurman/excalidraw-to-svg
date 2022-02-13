@@ -4,7 +4,7 @@ const jsdom = require("jsdom"); // used to create mock web interface (which exca
 /**
  * Function to convert an excalidraw JSON file to an SVG
  * @param {string | object} diagram excalidraw diagram to convert
- * @returns SVG XML string
+ * @returns SVG XML Node
  */
 const excalidrawToSvg = (diagram) => {
   const { JSDOM } = jsdom;
@@ -36,9 +36,9 @@ const excalidrawToSvg = (diagram) => {
 
   const dom = new JSDOM(exportScript, { runScripts: "dangerously" });
 
-  // pull the svg outerHTML and return that string
+  // pull the svg and return that Node
   const excalidrawSvg = dom.window.document.body.querySelector("svg");
-  return excalidrawSvg.outerHTML;
+  return excalidrawSvg;
 };
 
 module.exports = excalidrawToSvg;

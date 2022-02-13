@@ -9,7 +9,7 @@ const buildSvgPath = require("./build-svg-path");
 
 const excalidrawPath = process.argv[2];
 
-if (!jsonFileName) {
+if (!excalidrawPath) {
   throw Error(
     "No diagram file name passed in, please pass one in as the first argument"
   );
@@ -17,7 +17,7 @@ if (!jsonFileName) {
 
 const svgPath = buildSvgPath(excalidrawPath, process.argv[3]);
 
-const diagram = fs.readFileSync(jsonFileName, "utf8");
+const diagram = fs.readFileSync(excalidrawPath, "utf8");
 
-const svg = excalidrawToSvg(diagram);
+const svg = excalidrawToSvg(diagram).outerHTML;
 fs.writeFileSync(svgPath, svg);
