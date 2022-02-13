@@ -1,0 +1,29 @@
+{
+  "name": "excalidraw-to-svg",
+  "version": "1.0.0",
+  "description": "Node Library to transform excalidraw diagrams into svgs",
+  "main": "src/excalidraw-to-svg.js",
+  "bin": "./src/excalidraw-to-svg.js",
+  "scripts": {
+    "test": "jest src/*.test.js",
+    "test:watch": "jest src/*.test.js --watch"
+  },
+  "keywords": [
+    "excalidraw",
+    "svg",
+    "utils"
+  ],
+  "author": {
+    "name": "Jesse Jurman",
+    "email": "j.r.jurman@gmail.com",
+    "url": "https://jrjurman.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@excalidraw/utils": "^0.1.0-temp",
+    "canvas": "^2.9.0",
+    "jest": "^27.5.1",
+    "jsdom": "^19.0.0",
+    "prettier": "^2.5.1"
+  }
+}
