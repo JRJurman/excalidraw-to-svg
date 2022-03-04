@@ -24,12 +24,15 @@ const excalidrawToSvg = (diagram) => {
 		<body>
 			<script>
 				${excalidrawUtils}
-				const { exportToSvg } = ExcalidrawUtils
+        const buildSVG = async () => {
+          const { exportToSvg } = ExcalidrawUtils
 
-				const diagram = ${stringDiagram}
-				const svg = exportToSvg(diagram)
+          const diagram = ${stringDiagram}
+          const svg = await exportToSvg(diagram)
 
-				document.body.appendChild(svg)
+          document.body.appendChild(svg)
+        }
+				buildSVG()
 			</script>
 		</body>
 	`;
@@ -37,8 +40,22 @@ const excalidrawToSvg = (diagram) => {
   const dom = new JSDOM(exportScript, { runScripts: "dangerously" });
 
   // pull the svg and return that Node
-  const excalidrawSvg = dom.window.document.body.querySelector("svg");
-  return excalidrawSvg;
+  // since this happens asyncronously, we will wait for it to be available
+  const svgPromise = new Promise(async (resolve, reject) => {
+    let checks = 20;
+    const sleepTime = 10;
+    while (checks > 0) {
+      checks--;
+      const excalidrawSvg = dom.window.document.body.querySelector("svg");
+      if (excalidrawSvg) {
+        resolve(excalidrawSvg);
+      }
+      await new Promise((resolve) => setTimeout(resolve, sleepTime));
+    }
+    reject("svg was not created after expected period");
+  });
+
+  return svgPromise;
 };
 
 module.exports = excalidrawToSvg;

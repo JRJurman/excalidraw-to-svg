@@ -62,7 +62,7 @@ const excalidrawDiagram = {
   },
 };
 
-const diagramSvg = excalidrawToSvg(excalidrawDiagram);
+const diagramSvg = await excalidrawToSvg(excalidrawDiagram);
 console.log(diagram.outerHTML);
 ```
 

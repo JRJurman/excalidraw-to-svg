@@ -1,6 +1,6 @@
 {
   "name": "excalidraw-to-svg",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Node Library to transform excalidraw diagrams into svgs",
   "main": "src/excalidraw-to-svg.js",
   "bin": "./src/cli.js",
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@excalidraw/utils": "^0.1.0-temp",
+    "@excalidraw/utils": "^0.1.2",
     "canvas": "^2.9.0",
     "jest": "^27.5.1",
     "jsdom": "^19.0.0",
