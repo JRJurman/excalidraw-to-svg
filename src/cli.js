@@ -19,5 +19,16 @@ const svgPath = buildSvgPath(excalidrawPath, process.argv[3]);
 
 const diagram = fs.readFileSync(excalidrawPath, "utf8");
 
-const svg = excalidrawToSvg(diagram).outerHTML;
-fs.writeFileSync(svgPath, svg);
+const writeSvgSync = async () => {
+  try {
+    const svgElement = await excalidrawToSvg(diagram);
+    const svgOuterHTML = svgElement.outerHTML;
+    fs.writeFileSync(svgPath, svgOuterHTML);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    console.log("");
+  }
+};
+
+writeSvgSync();
