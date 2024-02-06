@@ -22,8 +22,10 @@
   "dependencies": {
     "@excalidraw/utils": "^0.1.2",
     "canvas": "^2.11.0",
+    "jsdom": "^21.1.1"
+  },
+  "devDependencies": {
     "jest": "^29.5.0",
-    "jsdom": "^21.1.1",
     "prettier": "^2.8.7"
   }
 }
