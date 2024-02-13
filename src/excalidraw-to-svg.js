@@ -15,6 +15,12 @@ const excalidrawToSvg = (diagram) => {
     "utf8"
   );
 
+  // load Path2D polyfill
+  const path2DPolyfill = fs.readFileSync(
+    "./node_modules/canvas-5-polyfill/canvas.js",
+    "utf8"
+  );
+
   // if the diagram is not a string, it's probably an object, and we need to stringify it
   const stringDiagram =
     typeof diagram === "string" ? diagram : JSON.stringify(diagram);
@@ -23,7 +29,17 @@ const excalidrawToSvg = (diagram) => {
   const exportScript = `
 		<body>
 			<script>
+
+        // mock CanvasRenderingContext2D (which currently blows up in the canvas-5-polyfill)
+        class CanvasRenderingContext2D {}
+
+        // load canvas-5-polyfill
+        ${path2DPolyfill}
+
+        // load excalidraw dependencies
 				${excalidrawUtils}
+
+        // custom logic to load an SVG
         const buildSVG = async () => {
           const { exportToSvg } = ExcalidrawUtils
 
@@ -37,7 +53,10 @@ const excalidrawToSvg = (diagram) => {
 		</body>
 	`;
 
-  const dom = new JSDOM(exportScript, { runScripts: "dangerously" });
+  const dom = new JSDOM(exportScript, {
+    runScripts: "dangerously",
+    resources: "usable",
+  });
 
   // pull the svg and return that Node
   // since this happens asyncronously, we will wait for it to be available

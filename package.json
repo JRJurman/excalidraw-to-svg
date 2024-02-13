@@ -21,8 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "@excalidraw/utils": "^0.1.2",
-    "canvas": "^2.11.0",
-    "jsdom": "^21.1.1"
+    "canvas-5-polyfill": "^0.1.5",
+    "jsdom": "^24.0.0"
   },
   "devDependencies": {
     "jest": "^29.5.0",
